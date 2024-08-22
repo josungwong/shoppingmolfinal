@@ -1,15 +1,26 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function ProductCard() {
+function ProductCard({ item }) {
+  const nav = useNavigate();
+  const toDetail = () => {
+    nav(`/product/${item.id}`);
+  };
   return (
     <div>
-        <img src='https://noona-hnm.netlify.app/wide-jeans.jpeg' alt='' width={200}/>
-        <div>영어</div>
-        <div>한글</div>
-        <div>가격</div>
-        <div>신제품</div>
+      <div className="card-hover" onClick={toDetail}>
+        <img src={item?.img} alt="" className="card-img" />
+        <div className="card-word">
+          <div className="card-title">
+            {item?.choice === true ? "Conscious choice" : ""}
+          </div>
+          <div>{item?.title}</div>
+          <div>{item?.price} 원</div>
+          <div>{item?.new === true ? "신제품" : ""}</div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;
